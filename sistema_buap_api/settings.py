@@ -19,7 +19,7 @@ SECRET_KEY = '-_&+lsebec(whhw!%n@ww&1j=4-^j_if9x8$q778+99oz&!ms2'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost',".onrender.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -138,6 +138,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
