@@ -21,8 +21,13 @@ from sistema_buap_api.views import alumnos
 from sistema_buap_api.views import maestros
 from sistema_buap_api.views import auth
 from sistema_buap_api.views import eventos
+from django.http import JsonResponse
+
+def health(request):
+    return JsonResponse({"status": "ok"})
 
 urlpatterns = [
+        path('', health),
         path('admin/', admin.site.urls),
         path('bootstrap/version', bootstrap.VersionView.as_view()),
         path('admins/', users.AdminView.as_view()),
