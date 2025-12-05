@@ -29,12 +29,9 @@ from django.template.loader import render_to_string
 import string
 import random
 import json
-from sistema_buap_api.models import Administradores
-from sistema_buap_api.serializers import AdminSerializer
 
 class AdminAll(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = AdminSerializer #se agrego esto
     def get(self, request, *args, **kwargs):
         admin = Administradores.objects.filter(user__is_active = 1).order_by("id")
         lista = AdminSerializer(admin, many=True).data
@@ -42,7 +39,6 @@ class AdminAll(generics.CreateAPIView):
         return Response(lista, 200)
 
 class AdminView(generics.CreateAPIView):
-    serializer_class = AdminSerializer #se agrego esto
     def get(self, request, *args, **kwargs):
         admin = get_object_or_404(Administradores, id = request.GET.get("id"))
         admin = AdminSerializer(admin, many=False).data
@@ -93,7 +89,6 @@ class AdminView(generics.CreateAPIView):
     
 class AdminsViewEdit(generics.CreateAPIView):
         permission_classes = (permissions.IsAuthenticated,)
-        serializer_class = AdminSerializer #se agrego esto
         def get(self, request, *args, **kwargs):
             admin = Administradores.objects.filter(user__is_active = 1).order_by("id")
             lista_admins = AdminSerializer(admin, many=True).data

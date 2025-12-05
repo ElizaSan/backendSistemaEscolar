@@ -29,13 +29,9 @@ from django.template.loader import render_to_string
 import string
 import random
 import json
-from sistema_buap_api.serializers import MaestroSerializer
-from sistema_buap_api.models import Maestros
-
 
 class MaestrosAll(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = MaestroSerializer
     def get(self, request, *args, **kwargs):
         maestros = Maestros.objects.filter(user__is_active = 1).order_by("id")
         maestros = MaestroSerializer(maestros, many=True).data
@@ -48,7 +44,6 @@ class MaestrosAll(generics.CreateAPIView):
     
 class MaestrosNames(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = MaestroSerializer
     def get(self, request, *args, **kwargs):
         
         maestros = Maestros.objects.filter(user__is_active = 1).order_by("id")
@@ -60,7 +55,6 @@ class MaestrosNames(generics.CreateAPIView):
         return Response(maestros, 200)
     
 class MaestroView(generics.CreateAPIView):
-    serializer_class = MaestroSerializer
     def get(self, request, *args, **kwargs):
         maestro = get_object_or_404(Maestros, id = request.GET.get("id"))
         maestro = MaestroSerializer(maestro, many=False).data
@@ -113,7 +107,6 @@ class MaestroView(generics.CreateAPIView):
     
 class MaestrosViewEdit(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = MaestroSerializer
     def put(self, request, *args, **kwargs):
         maestro = get_object_or_404(Maestros, id=request.data["id"])
         maestro.id_trabajador = request.data["id_trabajador"]

@@ -32,7 +32,6 @@ import json
 
 class AlumnosAll(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = AlumnoSerializer #se agrego esto
     def get(self, request, *args, **kwargs):
         alumnos = Alumnos.objects.filter(user__is_active = 1).order_by("id")
         alumnos = AlumnoSerializer(alumnos, many=True).data
@@ -41,7 +40,6 @@ class AlumnosAll(generics.CreateAPIView):
         return Response(alumnos, 200)
     
 class AlumnoView(generics.CreateAPIView):
-    serializer_class = AlumnoSerializer #se agrego esto
     def get(self, request, *args, **kwargs):
         alumno = get_object_or_404(Alumnos, id = request.GET.get("id"))
         alumno = AlumnoSerializer(alumno, many=False).data
@@ -102,7 +100,6 @@ class AlumnoView(generics.CreateAPIView):
     
 class AlumnosViewEdit(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = AlumnoSerializer
     def put(self, request, *args, **kwargs):
         alumno = get_object_or_404(Alumnos, id=request.data["id"])
         alumno.id_alumno = request.data["id_alumno"]

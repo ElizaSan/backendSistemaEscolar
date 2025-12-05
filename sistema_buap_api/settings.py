@@ -12,14 +12,13 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '-_&+lsebec(whhw!%n@ww&1j=4-^j_if9x8$q778+99oz&!ms2'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost',".onrender.com"]
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,11 +54,6 @@ CORS_ORIGIN_WHITELIST = [
 ] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:4200',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "https://frontend-sistema-escolar.vercel.app/",
 ]
 
 ROOT_URLCONF = 'sistema_buap_api.urls'
@@ -101,21 +95,19 @@ def read_mysql_config():
 
 mysql_config = read_mysql_config()
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQLDATABASE'),
-        'USER': os.environ.get('MYSQLUSER'),
-        'PASSWORD': os.environ.get('MYSQLPASSWORD'),
-        'HOST': os.environ.get('MYSQLHOST'),
-        'PORT': os.environ.get('MYSQLPORT', '18832'),
+        'NAME': mysql_config.get('database', 'railway'),
+        'USER': mysql_config.get('user', 'root'),
+        'PASSWORD': mysql_config.get('password', 'wyKoEWEEHfavEpKtGIdoDOlpIbpasYDf'),
+        'HOST': mysql_config.get('host', 'shuttle.proxy.rlwy.net'),
+        'PORT': mysql_config.get('port', '36625'),
         'OPTIONS': {
             'charset': 'utf8mb4',
         }
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -143,8 +135,6 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,

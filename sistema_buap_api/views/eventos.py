@@ -30,14 +30,11 @@ import string
 import random
 import json
 import logging
-from sistema_buap_api.models import Eventos
-from sistema_buap_api.serializers import EventoSerializer
 
 logger = logging.getLogger('sistema_buap_api')
 
 class EventosAll(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = EventoSerializer
     
     def get(self, request, *args, **kwargs):
         logger.info("=== OBTENIENDO LISTA DE EVENTOS ===")
@@ -59,7 +56,7 @@ class EventosAll(generics.CreateAPIView):
             )
     
 class EventosView(generics.CreateAPIView):
-    serializer_class = EventoSerializer
+    
     def get(self, request, *args, **kwargs):
         logger.debug(f"Obteniendo evento con ID: {request.GET.get('id')}")
         try:
@@ -167,7 +164,7 @@ class EventosView(generics.CreateAPIView):
 
 class EventosViewEdit(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = EventoSerializer
+    
     def put(self, request, *args, **kwargs):
         logger.info("=== ACTUALIZACIÓN DE EVENTO ===")
         logger.debug(f"Datos recibidos: {request.data}")
