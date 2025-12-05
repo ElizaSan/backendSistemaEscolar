@@ -100,9 +100,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': mysql_config.get('database', 'railway'),
         'USER': mysql_config.get('user', 'root'),
-        'PASSWORD': mysql_config.get('password', 'wyKoEWEEHfavEpKtGIdoDOlpIbpasYDf'),
-        'HOST': mysql_config.get('host', 'shuttle.proxy.rlwy.net'),
-        'PORT': mysql_config.get('port', '36625'),
+        'PASSWORD': mysql_config.get('password', 'NdleLGTmRqpQyLIqJxqyoCqCJDprcQWK'),
+        'HOST': mysql_config.get('host', 'crossover.proxy.rlwy.net'),
+        'PORT': mysql_config.get('port', '18832'),
         'OPTIONS': {
             'charset': 'utf8mb4',
         }
