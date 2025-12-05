@@ -57,6 +57,11 @@ CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:4200',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "https://frontend-sistema-escolar.vercel.app/",
+]
+
 ROOT_URLCONF = 'sistema_buap_api.urls'
 
 TEMPLATES = [
